@@ -5,7 +5,7 @@ License: Same terms as Vim itself (see |license|)
 
 This plugin is only available if 'compatible' is not set.
 
-INTRODUCTION                                    *vinegar*
+INTRODUCTION                                                    *vinegar*
 
 > Split windows and the project drawer go together like oil and vinegar.
 > I don't mean to say that you can combine them to create a delicious
@@ -16,30 +16,35 @@ by Drew Neil, 2013
 vinegar.vim enhances netrw, partially in an attempt to mitigate the 
 need for more disruptive "project drawer" style plugins.
 
-Mappings                                         *vinegar-mappings*
+MAPPINGS                                               *vinegar-mappings*
 
-                                                        *vinegar--*
+                                                              *vinegar--*
 -                      Press - in any buffer to hop up to the directory 
                        listing and seek to the file you just came from.
                        Keep bouncing to go up, up, up. Having rapid
                        directory access available changes everything.
 
+                                                              *vinegar-.*
 .                      Press . on a file to pre-populate it at the end
                        of a : command line.
                        This is great, for example, to quickly initiate
                        a :grep of the file or directory under the cursor.
 
+                                                              *vinegar-!*
 !                      Press ! on a file to pre-populate it at the end
                        of a :! command line.
                        Type !chmod +x and get :!chmod +x path/to/file.
 
+                                                              *vinegar-~*
 ~                      Press ~ to go home.
 
+                                                             *vinegar-cg*
 cg                     Press cg to :cd to the currently edited directory.
 
+                                                             *vinegar-cl*
 cl                     Press cl to :lcd to the currently edited directory.
 
-                                   *vinegar-selected-netrw-mappings*
+                                        *vinegar-selected-netrw-mappings*
 
 Following selected mappings are unchanged netrw mappings.
 For a comprehensive list of netrw mappings see |netrw-quickmap|.
@@ -54,9 +59,9 @@ gh                     Quick hide/unhide of dot-files
 x                      View file with an associated program
 I                      Toggle the netrw help banner display
 
-Frequently Asked Questions                        *vinegar-faq*
+FREQUENTLY ASKED QUESTIONS                                  *vinegar-faq*
 
-Q: I miss the netrw banner.
+Q: I miss the |g:netrw_banner|.
 
 A: All that annoying crap at the top is turned off,
    leaving you with nothing but a list of files.
@@ -65,53 +70,68 @@ A: All that annoying crap at the top is turned off,
    
    Press I to toggle until you adapt.
 
+
 Q: How can I hide dotfiles by default?
 
 A: Add to your vimrc 
 
-     let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+     `let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'`
      
   before vinegar.vim is loaded.
 
+
 Q: How can I hide certain file types?
 
-A: The netrw variable g:netrw_list_hide is deliberately
-   overwritten by vinegar.vim. Use |'wildignore'| for this.
+A: The netrw variable `g:netrw_list_hide` is deliberately overwritten by
+   |vinegar.vim|. Use |'wildignore'| for this.
    
-   Note: Setting wildignore has to be done
-         before vinegar.vim is loaded.
+   Note: Setting 'wildignore' has to be done before
+         |vinegar.vim| is loaded. This also means changes
+         later on, e.g. `$VIMRUNTIME/ftplugin/python.vim`,
+         adjusts 'wildignore' for *.pyc when opening a python
+         file, do not influence the behaviour of vinegar
+         anymore.
+
 
 Q: How can I hide files specified in gitignore?
 
 A: Add to your vimrc
 
-    let &wildignore = join(map(split(substitute(substitute(
-  \ netrw_gitignore#Hide(), '\.\*', '*', 'g'), '\\.', '.', 'g'),
-  \ ','), "v:val.','.v:val.'/'"), ',')
+   ```
+   let &wildignore = join(map(split(substitute(substitute(
+      \ netrw_gitignore#Hide(), '\.\*', '*', 'g'), '\\.', '.', 'g'),
+      \ ','), "v:val.','.v:val.'/'"), ',')
+   ```
   
-  before vinegar.vim is loaded.
+  before |vinegar.vim| is loaded.
   
-  Note: If you invoke vim not in your git project, only
-        the global gitignore is taken into account.
-        If you switch to a directory of different git
-        project, the local gitignore of this project is
-        not taken into account.
+  Note: If you invoke vim not in your git project, only the
+        global gitignore is taken into account; even if you
+        later change the pwd to your git project. Only if you
+        invoke vim in your git project, the local gitignore
+        is taken into account.  The reason for this is that
+        vim only evaluates the above given expression for
+        'wildignore' on startup.  All directory changes which
+        would affect the evaluation of `netrw_gitignore#Hide()`
+        are therefore ignored.
         For more details see |netrw-gitignore|.
+
 
 Q: How does vinegar sort the listing?
 
-A: The oddly C-biased default sort order by netrw and file hiding
-   is replaced with a sensible application of 'suffixes' and
-   'wildignore'.
+A: The oddly C-biased default sort order by netrw and file hiding is
+   replaced with a sensible application of 'suffixes' and 'wildignore'.
    
+
 Q: I want to map Esc to bring me back to the last buffer.
 
-A:    autocmd FileType netrw nmap <buffer> <esc> <C-^>
+A: `autocmd FileType netrw nmap <buffer> <esc> <C-^>`
       
+
 Q: I want to see line numbers.
 
 A: Put following in your vimrc
 
-   let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+   `let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'`
 
  vim:tw=78:et:ft=help:norl:
