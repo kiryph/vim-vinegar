@@ -76,7 +76,7 @@ A: Add to your vimrc
 
      `let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'`
      
-  before vinegar.vim is loaded.
+  before |vinegar.vim| is loaded.
 
 
 Q: How can I hide certain file types?
@@ -88,7 +88,7 @@ A: The netrw variable `g:netrw_list_hide` is deliberately overwritten by
    
       `set wildignore+=*.pyc`
       
-  before vinegar.vim is loaded.
+  before |vinegar.vim| is loaded.
    
    Note: Setting 'wildignore' has to be done before
          |vinegar.vim| is loaded. This also means changes
