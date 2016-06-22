@@ -85,6 +85,12 @@ Q: How can I hide certain file types?
 A: The netrw variable `g:netrw_list_hide` is deliberately overwritten by
    |vinegar.vim|. Use |'wildignore'| for this.
    
+   E.g., add to your vimrc
+   
+      `set wildignore+=*.pyc`
+      
+  before vinegar.vim is loaded.
+   
    Note: Setting 'wildignore' has to be done before
          |vinegar.vim| is loaded. This also means changes
          later on, e.g. `$VIMRUNTIME/ftplugin/python.vim`,
@@ -114,7 +120,8 @@ A: Add to your vimrc
         'wildignore' on startup.  All directory changes which
         would affect the evaluation of `netrw_gitignore#Hide()`
         are therefore ignored.
-        For more details see |netrw-gitignore|.
+        For more details how gitignore files are found see
+        |netrw-gitignore|.
 
 
 Q: How does vinegar sort the listing?
@@ -125,8 +132,10 @@ A: The oddly C-biased default sort order by netrw and file hiding is
 
 Q: I want to map Esc to bring me back to the last buffer.
 
-A: `autocmd FileType netrw nmap <buffer> <esc> <C-^>`
-      
+A: Put following in your vimrc
+
+    `autocmd FileType netrw nmap <buffer> <esc> <C-^>`
+ 
 
 Q: I want to see line numbers.
 
