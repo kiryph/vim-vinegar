@@ -1,0 +1,117 @@
+*vinegar.txt*  Combine with netrw to create a delicious salad dressing
+
+Author:  Tim Pope <http://tpo.pe/>
+License: Same terms as Vim itself (see |license|)
+
+This plugin is only available if 'compatible' is not set.
+
+INTRODUCTION                                    *vinegar*
+
+> Split windows and the project drawer go together like oil and vinegar.
+> I don't mean to say that you can combine them to create a delicious
+> salad dressing. I mean that they don't mix well!
+
+by Drew Neil, 2013
+
+vinegar.vim enhances netrw, partially in an attempt to mitigate the 
+need for more disruptive "project drawer" style plugins.
+
+Mappings                                         *vinegar-mappings*
+
+                                                        *vinegar--*
+-                      Press - in any buffer to hop up to the directory 
+                       listing and seek to the file you just came from.
+                       Keep bouncing to go up, up, up. Having rapid
+                       directory access available changes everything.
+
+.                      Press . on a file to pre-populate it at the end
+                       of a : command line.
+                       This is great, for example, to quickly initiate
+                       a :grep of the file or directory under the cursor.
+
+!                      Press ! on a file to pre-populate it at the end
+                       of a :! command line.
+                       Type !chmod +x and get :!chmod +x path/to/file.
+
+~                      Press ~ to go home.
+
+cg                     Press cg to :cd to the currently edited directory.
+
+cl                     Press cl to :lcd to the currently edited directory.
+
+                                   *vinegar-selected-netrw-mappings*
+
+Following selected mappings are unchanged netrw mappings.
+For a comprehensive list of netrw mappings see |netrw-quickmap|.
+
+<Enter>                Enter the directory or read the file
+R                      Rename the designated file(s)/directory(ies)
+D                      Attempt to remove the file/directory
+d                      Make a directory
+%                      Open a new file in netrw's current directory
+gh                     Quick hide/unhide of dot-files
+<c-l>                  Refresh the directory listing
+x                      View file with an associated program
+I                      Toggle the netrw help banner display
+
+Frequently Asked Questions                        *vinegar-faq*
+
+Q: I miss the netrw banner.
+
+A: All that annoying crap at the top is turned off,
+   leaving you with nothing but a list of files.
+   This is surprisingly disorienting, but ultimately
+   very liberating.
+   
+   Press I to toggle until you adapt.
+
+Q: How can I hide dotfiles by default?
+
+A: Add to your vimrc 
+
+     let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+     
+  before vinegar.vim is loaded.
+
+Q: How can I hide certain file types?
+
+A: The netrw variable g:netrw_list_hide is deliberately
+   overwritten by vinegar.vim. Use |'wildignore'| for this.
+   
+   Note: Setting wildignore has to be done
+         before vinegar.vim is loaded.
+
+Q: How can I hide files specified in gitignore?
+
+A: Add to your vimrc
+
+    let &wildignore = join(map(split(substitute(substitute(
+  \ netrw_gitignore#Hide(), '\.\*', '*', 'g'), '\\.', '.', 'g'),
+  \ ','), "v:val.','.v:val.'/'"), ',')
+  
+  before vinegar.vim is loaded.
+  
+  Note: If you invoke vim not in your git project, only
+        the global gitignore is taken into account.
+        If you switch to a directory of different git
+        project, the local gitignore of this project is
+        not taken into account.
+        For more details see |netrw-gitignore|.
+
+Q: How does vinegar sort the listing?
+
+A: The oddly C-biased default sort order by netrw and file hiding
+   is replaced with a sensible application of 'suffixes' and
+   'wildignore'.
+   
+Q: I want to map Esc to bring me back to the last buffer.
+
+A:    autocmd FileType netrw nmap <buffer> <esc> <C-^>
+      
+Q: I want to see line numbers.
+
+A: Put following in your vimrc
+
+   let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+
+ vim:tw=78:et:ft=help:norl:
