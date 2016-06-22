@@ -103,6 +103,12 @@ A: The oddly C-biased default sort order by netrw and file hiding
    
 Q: I want to map Esc to bring me back to the last buffer.
 
-      autocmd FileType netrw nmap <buffer> <esc> <C-^>
+A:    autocmd FileType netrw nmap <buffer> <esc> <C-^>
+      
+Q: I want to see line numbers.
+
+A: Put following in your vimrc
+
+   let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 
  vim:tw=78:et:ft=help:norl:
