@@ -25,10 +25,13 @@ Mappings                                         *vinegar-mappings*
                        directory access available changes everything.
 
 .                      Press . on a file to pre-populate it at the end
-                       of a : command line
+                       of a : command line.
+                       This is great, for example, to quickly initiate
+                       a :grep of the file or directory under the cursor.
 
 !                      Press ! on a file to pre-populate it at the end
-                       of a :! command line
+                       of a :! command line.
+                       Type !chmod +x and get :!chmod +x path/to/file.
 
 ~                      Press ~ to go home.
 
