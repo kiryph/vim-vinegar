@@ -63,10 +63,9 @@ FREQUENTLY ASKED QUESTIONS                                  *vinegar-faq*
 
 Q: I miss the |g:netrw_banner|.
 
-A: All that annoying crap at the top is turned off,
-   leaving you with nothing but a list of files.
-   This is surprisingly disorienting, but ultimately
-   very liberating.
+A: All that annoying crap at the top is turned off, leaving you with
+   nothing but a list of files. This is surprisingly disorienting, but
+   ultimately very liberating.
    
    Press I to toggle until you adapt.
 
