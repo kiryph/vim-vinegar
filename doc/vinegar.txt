@@ -44,11 +44,11 @@ For a comprehensive list of netrw mappings see |netrw-quickmap|.
 <Enter>                Enter the directory or read the file
 R                      Rename the designated file(s)/directory(ies)
 D                      Attempt to remove the file/directory
-d	                     Make a directory
-%	                     Open a new file in netrw's current directory
-gh	                   Quick hide/unhide of dot-files
-<c-l>	                 Refresh the directory listing
-x	                     View file with an associated program
+d                      Make a directory
+%                      Open a new file in netrw's current directory
+gh                     Quick hide/unhide of dot-files
+<c-l>                  Refresh the directory listing
+x                      View file with an associated program
 I                      Toggle the netrw help banner display
 
 Frequently Asked Questions                        *vinegar-faq*
