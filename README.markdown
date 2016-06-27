@@ -24,6 +24,8 @@ to even consider.
 * The oddly C-biased default sort order is replaced with a sensible application
   of `'suffixes'`.
 * File hiding follows `'wildignore'`.
+* Syntax match group `netrwSuffixes` based on `'suffixes'` highlighted as
+  `SpecialKey`.
 * Press `.` on a file to pre-populate it at the end of a `:` command line.
   This is great, for example, to quickly initiate a `:grep` of the file or
   directory under the cursor.  There's also `!`, which starts the line off
