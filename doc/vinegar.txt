@@ -77,6 +77,11 @@ A: Add to your vimrc
      `let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'`
      
   before |vinegar.vim| is loaded.
+  
+  Note: '\(^\|\s\s\)\zs\.\S\+' is a magic value defined
+        by the variable `s:dotfiles` in vinegar.vim. This
+        is the only accepted value for `g:netrw_list_hide`.
+        Everything else will be deliberately stripped off.
 
 
 Q: How can I hide certain file types?
