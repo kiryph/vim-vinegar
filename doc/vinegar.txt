@@ -167,5 +167,9 @@ A: `$VIMRUNTIME/syntax/netrw.vim` and `vinegar.vim`
      a summary of special files.
    - vinegar.vim extends this for files where the vim option
      'suffixes' applies to.
+  
+  Note: To open conveniently files on 'runtimepath' such
+        as `vinegar.vim`, the plugin `scriptease` provides
+        a dedicated command `:Vedit vinegar.vim`.
 
  vim:tw=78:et:ft=help:norl:
