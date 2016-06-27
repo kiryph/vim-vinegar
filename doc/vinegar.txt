@@ -154,6 +154,9 @@ A: Put following in your |$MYVIMRC| >
 <   
    see also |netrw-P19|
    
+   NOTE: `unimpaired.vim` mappings `con`, `cor`, ...
+         do not work.
+   
 
 Q: What affects the syntax highlighting in a vinegar window?
 
