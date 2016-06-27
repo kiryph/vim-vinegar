@@ -24,6 +24,9 @@ let g:netrw_list_hide =
 if !exists("g:netrw_banner")
   let g:netrw_banner = 0
 endif
+if !exists("g:netrw_special_syntax")
+  let g:netrw_special_syntax = 1
+endif
 let s:netrw_up = ''
 
 nnoremap <silent> <Plug>VinegarUp :call <SID>opendir('edit')<CR>
@@ -91,7 +94,7 @@ function! s:setup_vinegar() abort
   xmap <buffer> ! .!
   nnoremap <buffer> <silent> cg :exe 'keepjumps cd ' .<SID>fnameescape(b:netrw_curdir)<CR>
   nnoremap <buffer> <silent> cl :exe 'keepjumps lcd '.<SID>fnameescape(b:netrw_curdir)<CR>
-  if exists("g:netrw_special_syntax") && netrw_special_syntax
+  if exists("g:netrw_special_syntax") && g:netrw_special_syntax
     exe 'syn match netrwSuffixes =\%(\S\+ \)*\S\+\%('.join(map(split(&suffixes, ','), s:escape), '\|') . '\)[*@]\=\S\@!='
     hi def link netrwSuffixes SpecialKey
   endif
