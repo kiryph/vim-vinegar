@@ -170,6 +170,6 @@ A: `$VIMRUNTIME/syntax/netrw.vim` and `vinegar.vim`
   
   Note: To open conveniently files on 'runtimepath' such
         as `vinegar.vim`, the plugin `scriptease` provides
-        a dedicated command `:Vedit vinegar.vim`.
+        a dedicated command `:Vedit plugin/vinegar.vim`.
 
  vim:tw=78:et:ft=help:norl:
