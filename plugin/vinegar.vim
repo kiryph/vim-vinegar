@@ -20,7 +20,7 @@ let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'esc
 let s:escape = 'substitute(escape(v:val, ".$~"), "*", ".*", "g")'
 let g:netrw_list_hide =
       \ join(map(split(&wildignore, ','), '"^".' . s:escape . '. "$"'), ',') . ',^\.\.\=/\=$' .
-      \ (get(g:, 'netrw_list_hide', '')[-strlen(s:dotfiles)-1:-1] ==# s:dotfiles ? ','.s:dotfiles : '')
+      \ (get(g:, 'netrw_list_hide', '')[-strlen(s:dotfiles):-1] ==# s:dotfiles ? ','.s:dotfiles : '')
 if !exists("g:netrw_banner")
   let g:netrw_banner = 0
 endif
@@ -78,6 +78,11 @@ function! s:escaped(first, last) abort
 endfunction
 
 function! s:setup_vinegar() abort
+  if exists("w:netrw_wigkeep")
+      let g:netrw_list_hide =
+          \ join(map(split(w:netrw_wigkeep, ','), '"^".' . s:escape . '. "$"'), ',') . ',^\.\.\=/\=$' .
+          \ (get(g:, 'netrw_list_hide', '')[-strlen(s:dotfiles):-1] ==# s:dotfiles ? ','.s:dotfiles : '')
+  endif
   if empty(s:netrw_up)
     " save netrw mapping
     let s:netrw_up = substitute(maparg('-', 'n'), '\c^:\%(<c-u>\)\=', '', '')
