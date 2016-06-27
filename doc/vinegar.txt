@@ -125,8 +125,8 @@ A: Add to your vimrc
 
 Q: How does vinegar sort the listing?
 
-A: The oddly C-biased default sort order by netrw and file hiding is
-   replaced with a sensible application of 'suffixes' and 'wildignore'.
+A: The oddly C-biased default sort order by netrw is replaced with
+   a sensible application of 'suffixes'.
    
 
 Q: I want to map Esc to bring me back to the last buffer.
