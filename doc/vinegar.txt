@@ -148,5 +148,24 @@ A: Put following in your vimrc
    `let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'`
    
    see also |netrw-P19|
+   
+
+Q: What affects the syntax highlighting in a vinegar window?
+
+A: `$VIMRUNTIME/syntax/netrw.vim` and `vinegar.vim`
+
+  NOTE: The boolean variable `g:netrw_special_syntax`
+        enables special syntax for certain files.
+   
+        Add 
+   
+          let g:netrw_special_syntax = 1
+    
+        to your `$MYVIMRC` to enable this.
+   
+   - see netrw help under |g:netrw_special_syntax| for
+     a summary of special files.
+   - vinegar.vim extends this for files where the vim option
+     'suffixes' applies to.
 
  vim:tw=78:et:ft=help:norl:
