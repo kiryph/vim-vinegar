@@ -61,51 +61,52 @@ I                      Toggle the netrw help banner display
 
 FREQUENTLY ASKED QUESTIONS                                  *vinegar-faq*
 
-Q: I miss the |g:netrw_banner|.
+Q: I miss the netrw banner.
 
-A: All that annoying crap at the top is turned off, leaving you with
-   nothing but a list of files. This is surprisingly disorienting, but
-   ultimately very liberating.
+A: All that annoying crap at the top is turned off (|g:netrw_banner|),
+   leaving you with nothing but a list of files. This is surprisingly 
+   disorienting, but ultimately very liberating.
    
-   Press I to toggle until you adapt.
+   Press `I` (|netrw-I|) to toggle until you adapt.
 
 
 Q: How can I hide dotfiles by default?
 
-A: Add to your vimrc 
+A: Add to your |$MYVIMRC| 
 
      `let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'`
      
-  before |vinegar.vim| is loaded.
+  before |vinegar| is loaded.
   
-  Note: '\(^\|\s\s\)\zs\.\S\+' is a magic value defined
-        by the variable `s:dotfiles` in vinegar.vim. This
-        is the only accepted value for `g:netrw_list_hide`.
-        Everything else will be deliberately stripped off.
+  Note: `\(^\|\s\s\)\zs\.\S\+` is a magic value defined
+        by the variable `s:dotfiles` in `vinegar.vim`. This
+        is the only accepted value for |g:netrw_list_hide|.
+        Everything else will be deliberately overwritten by
+        |vinegar|.
 
 
 Q: How can I hide certain file types?
 
-A: The netrw variable `g:netrw_list_hide` is deliberately overwritten by
-   |vinegar.vim|. Use |'wildignore'| for this.
+A: The netrw variable |g:netrw_list_hide| is deliberately
+   overwritten by |vinegar|. Use 'wildignore' for this.
    
-   E.g., add to your vimrc
+   E.g., add to your |$MYVIMRC|
    
       `set wildignore+=*.pyc`
       
-  before |vinegar.vim| is loaded.
+  before |vinegar| is loaded.
    
    Note: Setting 'wildignore' has to be done before
-         |vinegar.vim| is loaded. This also means changes
-         later on, e.g. `$VIMRUNTIME/ftplugin/python.vim`,
-         adjusts 'wildignore' for *.pyc when opening a python
-         file, do not influence the behaviour of vinegar
+         |vinegar| is loaded. This also means changes
+         later on, e.g. `$VIMRUNTIME/ftplugin/python.vim`
+         adjusts 'wildignore' for `*.pyc` when opening a python
+         file, do not influence the behaviour of |vinegar|
          anymore.
 
 
 Q: How can I hide files specified in gitignore?
 
-A: Add to your vimrc
+A: Add to your |$MYVIMRC|
 
    ```
    let &wildignore = join(map(split(substitute(substitute(
@@ -113,7 +114,7 @@ A: Add to your vimrc
       \ ','), "v:val.','.v:val.'/'"), ',')
    ```
   
-  before |vinegar.vim| is loaded.
+  before |vinegar| is loaded.
   
   Note: If you invoke vim not in your git project, only the
         global gitignore is taken into account; even if you
@@ -128,22 +129,27 @@ A: Add to your vimrc
         |netrw-gitignore|.
 
 
-Q: How does vinegar sort the listing?
+Q: How does |vinegar| sort the listing?
 
 A: The oddly C-biased default sort order by netrw is replaced with
    a sensible application of 'suffixes'.
    
+   `let g:netrw_sort_sequence = `
+   `\ '[\/]$,*,\%(' . `
+   `\ join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') .`
+   `\ '\)[*@]\=$'`
+   
 
 Q: I want to map Esc to bring me back to the last buffer.
 
-A: Put following in your vimrc
+A: Put following in your |$MYVIMRC|
 
     `autocmd FileType netrw nmap <buffer> <esc> <C-^>`
  
 
 Q: I want to see line numbers.
 
-A: Put following in your vimrc
+A: Put following in your |$MYVIMRC|
 
    `let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'`
    
@@ -161,7 +167,7 @@ A: `$VIMRUNTIME/syntax/netrw.vim` and `vinegar.vim`
    
           let g:netrw_special_syntax = 1
     
-        to your `$MYVIMRC` to enable this.
+        to your |$MYVIMRC| to enable this.
    
    - see netrw help under |g:netrw_special_syntax| for
      a summary of special files.
