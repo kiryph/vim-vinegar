@@ -90,7 +90,7 @@ Q: How can I hide certain file types?
 A: The netrw variable |g:netrw_list_hide| is deliberately
    overwritten by |vinegar|. Use 'wildignore' for this.
    
-   E.g., add to your |$MYVIMRC|>
+   E.g., add to your |$MYVIMRC| >
    
       set wildignore+=*.pyc
 <      
@@ -106,7 +106,7 @@ A: The netrw variable |g:netrw_list_hide| is deliberately
 
 Q: How can I hide files specified in gitignore?
 
-A: Add to your |$MYVIMRC|>
+A: Add to your |$MYVIMRC| >
 
    let &wildignore = join(map(split(substitute(substitute(
       \ netrw_gitignore#Hide(), '\.\*', '*', 'g'), '\\.', '.', 'g'),
@@ -131,7 +131,7 @@ A: Add to your |$MYVIMRC|>
 Q: How does |vinegar| sort the listing?
 
 A: The oddly C-biased default sort order by |netrw| is replaced with
-   a sensible application of 'suffixes'.>
+   a sensible application of 'suffixes'. >
    
    let g:netrw_sort_sequence =
      \ '[\/]$,*,\%(' .
@@ -141,14 +141,14 @@ A: The oddly C-biased default sort order by |netrw| is replaced with
 
 Q: I want to map Esc to bring me back to the last buffer.
 
-A: Put following in your |$MYVIMRC|>
+A: Put following in your |$MYVIMRC| >
 
     autocmd FileType netrw nmap <buffer> <esc> <C-^>
- <
+<
 
 Q: I want to see line numbers.
 
-A: Put following in your |$MYVIMRC|>
+A: Put following in your |$MYVIMRC| >
 
    let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 <   
@@ -165,7 +165,7 @@ A: `$VIMRUNTIME/syntax/netrw.vim` and `vinegar.vim`
         Add >
    
           let g:netrw_special_syntax = 1
- <   
+<   
         to your |$MYVIMRC| to enable this.
    
    - see netrw help under |g:netrw_special_syntax| for
