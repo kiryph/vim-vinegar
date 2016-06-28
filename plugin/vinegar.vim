@@ -80,6 +80,7 @@ function! s:setup_vinegar() abort
           \ join(map(split(w:netrw_wigkeep, ','), '"^".' . s:escape . '. "$"'), ',') . ',^\.\.\=/\=$' .
           \ (get(g:, 'netrw_list_hide', '')[-strlen(s:dotfiles):-1] ==# s:dotfiles ? ','.s:dotfiles : '')
   endif
+  let g:netrw_sort_sequence = '[\/]$,*,\%(' . join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') . '\)[*@]\=$'
   if empty(s:netrw_up)
     " save netrw mapping
     let s:netrw_up = substitute(maparg('-', 'n'), '\c^:\%(<c-u>\)\=', '', '')
