@@ -54,6 +54,11 @@ gh                     Quick hide/unhide of dot-files
 x                      View file with an associated program
 I                      Toggle the netrw help banner display
 
+Following netrw mappings are unmapped:
+
+c                      Make browsing directory the current directory |netrw-c|.
+                       Use cg instead. 
+
 Frequently Asked Questions                        *vinegar-faq*
 
 Q: I miss the netrw banner.
