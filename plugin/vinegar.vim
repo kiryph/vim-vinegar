@@ -126,6 +126,7 @@ function! s:setup_vinegar() abort
   endif
   nmap <buffer> ! .!
   xmap <buffer> ! .!
+  nunmap  <buffer> c
   nnoremap <buffer> <silent> cg :exe 'keepjumps cd ' .<SID>fnameescape(b:netrw_curdir)<CR>
   nnoremap <buffer> <silent> cl :exe 'keepjumps lcd '.<SID>fnameescape(b:netrw_curdir)<CR>
   if exists("g:netrw_special_syntax") && g:netrw_special_syntax
