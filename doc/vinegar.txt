@@ -5,7 +5,7 @@ License: Same terms as Vim itself (see |license|)
 
 This plugin is only available if 'compatible' is not set.
 
-INTRODUCTION                                                    *vinegar*
+INTRODUCTION                                     *vinegar*
 
 > Split windows and the project drawer go together like oil and vinegar.
 > I don't mean to say that you can combine them to create a delicious
@@ -13,63 +13,91 @@ INTRODUCTION                                                    *vinegar*
 
 by Drew Neil, 2013
 
-vinegar.vim enhances netrw, partially in an attempt to mitigate the 
-need for more disruptive "project drawer" style plugins.
+vinegar.vim enhances netrw, partially in an attempt to mitigate the need for
+more disruptive "project drawer" style plugins.
 
-MAPPINGS                                               *vinegar-mappings*
+MAPPINGS                                         *vinegar-mappings*
 
-                                                              *vinegar--*
--                      Press - in any buffer to hop up to the directory 
-                       listing and seek to the file you just came from.
-                       Keep bouncing to go up, up, up. Having rapid
-                       directory access available changes everything.
+                                                 *vinegar--*
+-                      Press - in any buffer to hop up to the directory
+                       listing and seek to the file you just came from. Keep
+                       bouncing to go up, up, up. Having rapid directory
+                       access available changes everything.
 
-                                                              *vinegar-.*
-.                      Press . on a file to pre-populate it at the end
-                       of a : command line.
-                       This is great, for example, to quickly initiate
-                       a :grep of the file or directory under the cursor.
-
-                                                              *vinegar-!*
-!                      Press ! on a file to pre-populate it at the end
-                       of a :! command line.
-                       Type !chmod +x and get :!chmod +x path/to/file.
-
-                                                              *vinegar-~*
+                                                 *vinegar-~*
 ~                      Press ~ to go home.
 
-                                                             *vinegar-cg*
+                                                 *vinegar-cg*
 cg                     Press cg to :cd to the currently edited directory.
 
-                                                             *vinegar-cl*
+                                                 *vinegar-cl*
 cl                     Press cl to :lcd to the currently edited directory.
 
-                                        *vinegar-selected-netrw-mappings*
+                                                 *vinegar-y.*
+y.                     Press y. to yank an absolute path for the file
+                       under the cursor.
 
-Following selected mappings are unchanged netrw mappings.
+                                                 *vinegar-c_CTRL-R_CTRL_F*
+                                                 *vinegar-c_<C-R>_<C-F>*
+CTRL-R CTRL-F          Insert the filename under the cursor in the cmdline and
+                       add if relative `./`.  Note this mapping already exists
+                       in vim (|c_CTRL-R_CTRL-F|) without the bonus feature
+                       provided by vinegar.  This is great, for example, for
+                       `:find <C-R><C-F>` and `:!ruby -r<C-R><C-F>` .
+
+                                                 *vinegar-.*
+.                      Press `.` on a file to pre-populate it at the end of
+                       a `:` command line. This is great, for example, to
+                       quickly initiate a `:grep` of the file or directory
+                       under the cursor.
+
+                                                 *vinegar-!*
+!                      Press `!` on a file to pre-populate it at the end
+                       of a `:!` command line.
+                       Type `!chmod +x` and get `:!chmod +x path/to/file` .
+
+
+                                                 *vinegar-netrw-mappings*
+
+Following selected mappings are unchanged netrw mappings:
+
+<Enter>                Enter the directory or read the file       |netrw-enter|
+I                      Toggle the netrw help banner display       |netrw-I|
+>
+ " ===========================================================================
+ " Netrw Directory Listing                                     (netrw VERSION)
+ "   <PATH>
+ "   Sorted by |g:netrw_sort_by| "name", "time", "size", or "exten"
+ "   Hiding:   |g:netrw_list_hide|
+ "   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:special
+ " ===========================================================================
+<
+                       Note: See |vinegar-sorting| and |vinegar-file-hiding| for
+                             deviating behavior from netrw.
+>
+d                      Make a directory                           |netrw-d|
+                       (see also |eunuch-:Mkdir| if installed)
+%                      Open a new file in netrw's pwd             |netrw-%|
+gh                     Quick hide/unhide of dot-files             |netrw-gh|
+<c-l>                  Refresh the directory listing              |netrw-ctrl-l|
+x                      View file with an associated program       |netrw-x|
+
 For a comprehensive list of netrw mappings see |netrw-quickmap|.
 
-<Enter>                Enter the directory or read the file
-R                      Rename the designated file(s)/directory(ies)
-D                      Attempt to remove the file/directory
-d                      Make a directory
-%                      Open a new file in netrw's current directory
-gh                     Quick hide/unhide of dot-files
-<c-l>                  Refresh the directory listing
-x                      View file with an associated program
-I                      Toggle the netrw help banner display
+FREQUENTLY ASKED QUESTIONS                       *vinegar-faq*
 
-FREQUENTLY ASKED QUESTIONS                                  *vinegar-faq*
-
+                                                 *vinegar-faq1*
+                                                 *vinegar-netrw-banner*
 Q: I miss the netrw banner.
 
 A: All that annoying crap at the top is turned off (|g:netrw_banner|),
    leaving you with nothing but a list of files. This is surprisingly 
    disorienting, but ultimately very liberating.
-   
+
    Press `I` (|netrw-I|) to toggle until you adapt.
 
-
+                                                *vinegar-faq2*
+                                                *vinegar-dotfile-hiding*
 Q: How can I hide dotfiles by default?
 
 A: Add to your |$MYVIMRC| >
@@ -77,25 +105,26 @@ A: Add to your |$MYVIMRC| >
      let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 <     
   before |vinegar| is loaded.
-  
+
   Note: `'\(^\|\s\s\)\zs\.\S\+'` is a magic value defined
         by the variable `s:dotfiles` in `vinegar.vim`. This
         is the only accepted value for |g:netrw_list_hide|.
         Everything else will be deliberately overwritten by
         |vinegar|.
 
-
+                                                 *vinegar-faq3*
+                                                 *vinegar-file-hiding*
 Q: How can I hide certain file types?
 
 A: The netrw variable |g:netrw_list_hide| is deliberately
    overwritten by |vinegar|. Use 'wildignore' for this.
-   
+
    E.g., add to your |$MYVIMRC| >
-   
+
       set wildignore+=*.pyc
 <      
   before |vinegar| is loaded.
-   
+
    Note: Setting 'wildignore' has to be done before
          |vinegar| is loaded. This also means changes
          later on, e.g. `$VIMRUNTIME/ftplugin/python.vim`
@@ -103,7 +132,8 @@ A: The netrw variable |g:netrw_list_hide| is deliberately
          file, do not influence the behaviour of |vinegar|
          anymore.
 
-
+                                                 *vinegar-faq4*
+                                                 *vinegar-gitignore-hiding*
 Q: How can I hide files specified in gitignore?
 
 A: Add to your |$MYVIMRC| >
@@ -114,7 +144,7 @@ A: Add to your |$MYVIMRC| >
 <
   
   before |vinegar| is loaded.
-  
+
   Note: If you invoke vim not in your git project, only the
         global gitignore is taken into account; even if you
         later change the pwd to your git project. Only if you
@@ -124,28 +154,32 @@ A: Add to your |$MYVIMRC| >
         'wildignore' on startup.  All directory changes which
         would affect the evaluation of `netrw_gitignore#Hide()`
         are therefore ignored.
-        For more details how gitignore files are found see
+
+  Note: For more details how gitignore files are found see
         |netrw-gitignore|.
 
-
+                                                *vinegar-faq5*
+                                                *vinegar-sorting*
 Q: How does |vinegar| sort the listing?
 
 A: The oddly C-biased default sort order by |netrw| is replaced with
    a sensible application of 'suffixes'. >
-   
+
    let g:netrw_sort_sequence =
      \ '[\/]$,*,\%(' .
      \ join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') .
      \ '\)[*@]\=$'
 <
-
+                                                *vinegar-faq6*
+                                                *vinegar-maps-esc*
 Q: I want to map Esc to bring me back to the last buffer.
 
 A: Put following in your |$MYVIMRC| >
 
     autocmd FileType netrw nmap <buffer> <esc> <C-^>
 <
-
+                                                *vinegar-faq7*
+                                                *vinegar-line-numbers*
 Q: I want to see line numbers.
 
 A: Put following in your |$MYVIMRC| >
@@ -153,31 +187,28 @@ A: Put following in your |$MYVIMRC| >
    let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 <   
    see also |netrw-P19|
-   
-   NOTE: `unimpaired.vim` mappings `con`, `cor`, ...
+                                                *vinegar-unimpaired*
+   NOTE: |unimpaired-toggling| such as `con`, `cor`, `coc`, `cou`, `cox`, `coh`, ...
          do not work.
-   
 
+                                                *vinegar-faq8*
+                                                *vinegar-syntax*
 Q: What affects the syntax highlighting in a vinegar window?
 
-A: `$VIMRUNTIME/syntax/netrw.vim` and `vinegar.vim`
+A: `$VIMRUNTIME/syntax/netrw.vim` and `plugin/vinegar.vim`
 
   NOTE: The boolean variable `g:netrw_special_syntax`
         enables special syntax for certain files.
-   
+
         Add >
-   
+
           let g:netrw_special_syntax = 1
 <   
         to your |$MYVIMRC| to enable this.
-   
+
    - see netrw help under |g:netrw_special_syntax| for
      a summary of special files.
-   - vinegar.vim extends this for files where the vim option
+   - `vinegar.vim` extends this for files where the vim option
      'suffixes' applies to.
-  
-  Note: To open conveniently files on 'runtimepath' such
-        as `vinegar.vim`, the plugin `scriptease` provides
-        a dedicated command `:Vedit plugin/vinegar.vim`.
 
  vim:tw=78:et:ft=help:norl:
