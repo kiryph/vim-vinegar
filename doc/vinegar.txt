@@ -59,7 +59,12 @@ CTRL-R CTRL-F          Insert the filename under the cursor in the cmdline and
 
                                                  *vinegar-netrw-mappings*
 
-Following selected mappings are unchanged netrw mappings:
+Following netrw mappings are unmapped:
+                                                 *vinegar-netrw-c*
+c                      Make browsing directory the current directory |netrw-c|.
+                       Use |vinegar-cg| instead. 
+
+Following selected netrw mappings are unchanged:
 
 <Enter>                Enter the directory or read the file       |netrw-enter|
 I                      Toggle the netrw help banner display       |netrw-I|
@@ -83,6 +88,7 @@ gh                     Quick hide/unhide of dot-files             |netrw-gh|
 x                      View file with an associated program       |netrw-x|
 
 For a comprehensive list of netrw mappings see |netrw-quickmap|.
+
 
 FREQUENTLY ASKED QUESTIONS                       *vinegar-faq*
 
